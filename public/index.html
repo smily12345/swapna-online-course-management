@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swapna LMS | Online Courses</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-logo">S</div><div><strong>SWAPNA LMS</strong><small>Online Learning</small></div></div>
+    <div class="nav-label">LEARNING SPACE</div>
+    <button class="nav-link active" data-page="dashboard"><span>▦</span> Dashboard</button>
+    <button class="nav-link" data-page="courses"><span>▣</span> Explore courses</button>
+    <button class="nav-link" data-page="learning"><span>◷</span> My learning</button>
+    <button class="nav-link" data-page="instructor"><span>✎</span> Instructor studio</button>
+    <div class="sidebar-bottom"><div class="avatar" id="sideAvatar">S</div><div><strong id="sideName">Guest learner</strong><small id="sideRole">Sign in to get started</small></div></div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div><div class="eyebrow">SWAPNA'S ONLINE LEARNING PLATFORM</div><h1 id="pageTitle">Dashboard overview</h1></div>
+      <div class="top-right"><span class="live-dot"></span><span>Learning portal</span><button class="outline-button" id="authButton">Login / Register</button><button class="text-button" id="logoutButton" hidden>Logout</button></div>
+    </header>
+
+    <section id="dashboardPage" class="page active">
+      <section class="hero"><div class="hero-copy"><span class="hero-tag">LEARN • BUILD • GROW</span><h2>Skills for today.<br><em>Confidence for tomorrow.</em></h2><p>Discover practical courses, learn at your own pace and track your progress in one place.</p><button class="hero-button" data-go="courses">Explore courses <span>→</span></button></div></section>
+      <div class="section-heading"><div><h2>Your learning snapshot</h2><p>Overview from your LMS database</p></div><button class="outline-button" id="refreshButton">↻ Refresh data</button></div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-icon blue">▣</div><span>Available courses</span><strong id="availableCount">0</strong><small>Courses to explore</small></article>
+        <article class="stat-card"><div class="stat-icon violet">◷</div><span>My enrollments</span><strong id="enrollmentCount">0</strong><small>Courses you joined</small></article>
+        <article class="stat-card"><div class="stat-icon amber">✓</div><span>Lessons completed</span><strong id="completedCount">0</strong><small>Your learning progress</small></article>
+        <article class="stat-card"><div class="stat-icon green">✎</div><span>My courses</span><strong id="instructorCount">0</strong><small>Instructor courses</small></article>
+      </div>
+      <section class="content-card welcome-card"><div><span class="hero-tag">START LEARNING</span><h3>Small steps lead to big skills.</h3><p>Browse the course catalogue or sign in to continue your learning journey.</p></div><button class="primary-button" data-go="courses">Browse catalogue</button></section>
+    </section>
+
+    <section id="coursesPage" class="page">
+      <div class="section-heading"><div><h2>Explore courses</h2><p>Browse all courses published by instructors.</p></div><input class="search-input" id="courseSearch" placeholder="Search courses..."></div>
+      <div class="course-grid" id="courseGrid"><div class="empty-card">Loading courses...</div></div>
+    </section>
+
+    <section id="learningPage" class="page">
+      <div class="section-heading"><div><h2>My learning</h2><p>Courses you enrolled in and lesson completion.</p></div><button class="outline-button" id="reloadLearning">↻ Refresh</button></div>
+      <div class="course-grid" id="learningGrid"><div class="empty-card">Please log in as a student to view your learning.</div></div>
+    </section>
+
+    <section id="instructorPage" class="page">
+      <div class="section-heading"><div><h2>Instructor studio</h2><p>Create courses and add lessons for your students.</p></div><button class="primary-button" id="addCourseBtn">＋ Create course</button></div>
+      <section class="content-card form-card" id="courseFormCard" hidden><div class="card-heading"><div><h3>Create a course</h3><p>Course details will be saved to MySQL.</p></div><button class="close-button" data-close="courseFormCard">✕</button></div>
+        <form id="courseForm" class="form-grid">
+          <label>Course title<input name="title" required maxlength="180" placeholder="e.g. Full Stack Web Development"></label>
+          <label>Category<input name="category" required placeholder="Web Development"></label>
+          <label>Level<select name="level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label>
+          <label>Course image URL<input name="image_url" placeholder="https://... (optional)"></label>
+          <label class="wide">Description<textarea name="description" required rows="3" placeholder="What will students learn?"></textarea></label>
+          <div class="form-actions"><button class="primary-button" type="submit">Publish course</button><button class="outline-button" type="button" data-close="courseFormCard">Cancel</button></div>
+        </form><p class="message" id="courseMessage"></p>
+      </section>
+      <section class="content-card"><div class="card-heading"><div><h3>Courses I teach</h3><p id="myCourseCount">0 courses</p></div></div><div class="table-scroll"><table><thead><tr><th>COURSE</th><th>LEVEL</th><th>LESSONS</th><th>STUDENTS</th><th>ACTIONS</th></tr></thead><tbody id="myCoursesTable"><tr><td colspan="5" class="empty">Log in as an instructor to manage courses.</td></tr></tbody></table></div></section>
+      <section class="content-card form-card" id="lessonFormCard" hidden><div class="card-heading"><div><h3>Add lesson</h3><p>Add a learning unit to your selected course.</p></div><button class="close-button" data-close="lessonFormCard">✕</button></div>
+        <form id="lessonForm" class="form-grid">
+          <input type="hidden" name="course_id">
+          <label>Lesson title<input name="title" required placeholder="Introduction to HTML"></label>
+          <label>Lesson order<input name="lesson_order" type="number" min="1" value="1" required></label>
+          <label class="wide">Lesson content<textarea name="content" rows="4" required placeholder="Explain the lesson topic..."></textarea></label>
+          <label class="wide">Video URL (optional)<input name="video_url" placeholder="https://..."></label>
+          <div class="form-actions"><button class="primary-button" type="submit">Save lesson</button><button class="outline-button" type="button" data-close="lessonFormCard">Cancel</button></div>
+        </form><p class="message" id="lessonMessage"></p>
+      </section>
+    </section>
+
+    <footer>© 2026 Swapna's Online Courses LMS</footer>
+  </main>
+
+  <div class="modal-backdrop" id="authModal" hidden>
+    <section class="auth-modal">
+      <button class="close-button modal-close" id="closeAuth">✕</button>
+      <span class="hero-tag">WELCOME TO SWAPNA LMS</span><h2 id="authTitle">Create your account</h2>
+      <div class="auth-tabs"><button class="auth-tab active" id="registerTab">Register</button><button class="auth-tab" id="loginTab">Login</button></div>
+      <form id="authForm" class="form-grid">
+        <label id="nameField">Full name<input name="name" required placeholder="Your name"></label>
+        <label>Email address<input name="email" type="email" required placeholder="you@example.com"></label>
+        <label>Password<input name="password" type="password" required minlength="6" placeholder="At least 6 characters"></label>
+        <label id="roleField">Account type<select name="role"><option value="student">Student</option><option value="instructor">Instructor</option></select></label>
+        <button class="primary-button wide" type="submit" id="authSubmit">Create account</button>
+      </form><p class="message" id="authMessage"></p>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="courseModal" hidden><section class="auth-modal course-modal"><button class="close-button modal-close" id="closeCourse">✕</button><div id="courseDetail"></div></section></div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>

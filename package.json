@@ -1,0 +1,17 @@
+{
+  "name": "swapna-online-courses-lms",
+  "version": "1.0.0",
+  "description": "FSD Lab project - Online Courses Learning Management System",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.12.0"
+  }
+}
