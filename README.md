@@ -110,3 +110,4 @@ Swapna_Online_Courses_LMS/
 - Use an instructor account to create courses and lessons.
 - Use a student account to enroll and track learning.
 - Images and Google Fonts use external URLs and need internet access.
+# swapna-online-course-management
